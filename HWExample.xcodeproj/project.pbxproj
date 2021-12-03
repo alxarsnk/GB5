@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B680220275A85C400E110A1 /* ReakmViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68021F275A85C400E110A1 /* ReakmViewContoller.swift */; };
+		1B680222275A867200E110A1 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B680221275A867200E110A1 /* TestModel.swift */; };
+		1B680224275A972100E110A1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B680223275A972100E110A1 /* RealmManager.swift */; };
 		1BCAB5B5275690C200F4BD5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAB5B4275690C200F4BD5F /* AppDelegate.swift */; };
 		1BCAB5B7275690C200F4BD5F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAB5B6275690C200F4BD5F /* SceneDelegate.swift */; };
 		1BCAB5B9275690C200F4BD5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAB5B8275690C200F4BD5F /* ViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B68021F275A85C400E110A1 /* ReakmViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReakmViewContoller.swift; sourceTree = "<group>"; };
+		1B680221275A867200E110A1 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
+		1B680223275A972100E110A1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		1BCAB5B1275690C200F4BD5F /* HWExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BCAB5B4275690C200F4BD5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BCAB5B6275690C200F4BD5F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,11 +79,14 @@
 				1BCAB5B6275690C200F4BD5F /* SceneDelegate.swift */,
 				1BCAB5B8275690C200F4BD5F /* ViewController.swift */,
 				1BCAB5BA275690C200F4BD5F /* Main.storyboard */,
+				1B68021F275A85C400E110A1 /* ReakmViewContoller.swift */,
+				1B680221275A867200E110A1 /* TestModel.swift */,
 				1BCAB5BD275690C300F4BD5F /* Assets.xcassets */,
 				1BCAB5BF275690C300F4BD5F /* LaunchScreen.storyboard */,
 				1BCAB5C2275690C300F4BD5F /* Info.plist */,
 				1BCAB5C82756950200F4BD5F /* Session.swift */,
 				1BCAB5CA2756955300F4BD5F /* ListViewController.swift */,
+				1B680223275A972100E110A1 /* RealmManager.swift */,
 				1BCAB5CC2756992800F4BD5F /* Model.swift */,
 			);
 			path = HWExample;
@@ -89,7 +98,6 @@
 				A1B8197A6BAF48B07A38109D /* Pods-HWExample.debug.xcconfig */,
 				3E7177FFC2AA06F766814212 /* Pods-HWExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -219,6 +227,9 @@
 				1BCAB5C92756950200F4BD5F /* Session.swift in Sources */,
 				1BCAB5B9275690C200F4BD5F /* ViewController.swift in Sources */,
 				1BCAB5B5275690C200F4BD5F /* AppDelegate.swift in Sources */,
+				1B680222275A867200E110A1 /* TestModel.swift in Sources */,
+				1B680220275A85C400E110A1 /* ReakmViewContoller.swift in Sources */,
+				1B680224275A972100E110A1 /* RealmManager.swift in Sources */,
 				1BCAB5CD2756992800F4BD5F /* Model.swift in Sources */,
 				1BCAB5CB2756955300F4BD5F /* ListViewController.swift in Sources */,
 				1BCAB5B7275690C200F4BD5F /* SceneDelegate.swift in Sources */,

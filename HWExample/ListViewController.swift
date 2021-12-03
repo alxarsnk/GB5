@@ -12,6 +12,8 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var datalabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    let realmManager = RealmManager()
 
     var totalCount: Int = 0
     var totalLoaded: Int = 0
@@ -22,7 +24,10 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
-        makeFriendsRequest(isInitial: true, from: totalLoaded, count: 20)
+        dataSource = realmManager.getFrineds()
+        tableView.reloadData()
+         
+//        makeFriendsRequest(isInitial: true, from: totalLoaded, count: 20)
         
     }
     
@@ -53,6 +58,10 @@ class ListViewController: UIViewController {
 //                if isInitial {
 //                    self?.totalCount = fetchedResponse.response.count
                     self?.dataSource = Array(frineds!)
+                    
+                
+                
+                
 //                } else {
 //                    self?.dataSource.append(contentsOf: frineds)
 //                }
@@ -60,6 +69,7 @@ class ListViewController: UIViewController {
 //                self?.totalLoaded += frineds.count
                 
                 DispatchQueue.main.async {
+                    self?.realmManager.save(data: Array(frineds!))
                     self?.datalabel.text = string
                     self?.tableView.reloadData()
                 }
