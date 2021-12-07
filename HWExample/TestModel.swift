@@ -10,15 +10,15 @@ import Realm
 import RealmSwift
 
 
+class StepCounter: Object {
+    @objc dynamic var steps = 1
+}
+
 @objcMembers
 class Dog: Object {
-    dynamic var id = 0
+    
     dynamic var name = ""
     dynamic var age = 0
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
     
 }
 

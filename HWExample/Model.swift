@@ -61,6 +61,9 @@ class Friend: Object, Codable {
         case trackCode = "track_code"
     }
     
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 @objcMembers

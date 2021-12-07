@@ -85,6 +85,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g14-vB-btw">
+                                <rect key="frame" x="270" y="79" width="91" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="AddFriend"/>
+                                <connections>
+                                    <action selector="addFirend:" destination="b57-M6-upo" eventType="touchUpInside" id="fJT-ol-5PX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QzB-Ri-h4C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

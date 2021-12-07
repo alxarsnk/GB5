@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class ListViewController: UIViewController {
     
@@ -14,25 +15,60 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let realmManager = RealmManager()
-
+    
     var totalCount: Int = 0
     var totalLoaded: Int = 0
     var isLoading: Bool = false
     
-    var dataSource: [Friend] = []
+
+    var token: NotificationToken?
+    var dataSource: Results<Friend>?
     
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
-        dataSource = realmManager.getFrineds()
-        tableView.reloadData()
-         
-//        makeFriendsRequest(isInitial: true, from: totalLoaded, count: 20)
-        
+        mathcRealm()
     }
     
-    func makeFriendsRequest(isInitial: Bool, from: Int, count: Int) {
-        isLoading = true
+    func mathcRealm() {
+        let realm = try! Realm()
+        dataSource = realm.objects(Friend.self)
+        token = dataSource?.observe { [weak self] changes in
+            switch changes {
+            case let .update(results, deletions, insertions, modifications):
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .fade)
+                self?.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .fade)
+                self?.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .fade)
+                self?.tableView.endUpdates()
+                print("UPDATED")
+                
+                print(self?.dataSource?.count)
+            case .initial:
+                self?.tableView.reloadData()
+                print("INTITAL")
+            case .error(let error):
+                print("Error")
+                
+            }
+        }
+    }
+    
+    @IBAction func addFirend(_ sender: Any) {
+        makeFriendsRequest()
+//        let realm = try! Realm()
+//        realm.beginWrite()
+//        let friend = Friend()
+//        friend.firstName = "NEW FRIEND 2"
+//        friend.lastName = "Last"
+//        friend.domain = ""
+//        friend.trackCode = ""
+//        realm.add(friend)
+//        try! realm.commitWrite()
+    }
+    
+    
+    func makeFriendsRequest() {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -40,8 +76,6 @@ class ListViewController: UIViewController {
         urlComponents.queryItems = [
             URLQueryItem(name: "fields", value: "city,domain,sex,bdate"),
             URLQueryItem(name: "v", value: "5.131"),
-//            URLQueryItem(name: "offset", value: "\(from)"),
-//            URLQueryItem(name: "count", value: "\(count)"),
             URLQueryItem(name: "access_token", value: Session.shared.token),
         ]
         
@@ -52,34 +86,12 @@ class ListViewController: UIViewController {
                 let fetchedResponse = try JSONDecoder().decode(VKFriendResponse.self, from: data!)
                 let frineds = fetchedResponse.response?.items
                 
-                
                 let string = frineds?.first?.lastName
-            
-//                if isInitial {
-//                    self?.totalCount = fetchedResponse.response.count
-                    self?.dataSource = Array(frineds!)
-                    
-                
-                
-                
-//                } else {
-//                    self?.dataSource.append(contentsOf: frineds)
-//                }
-               
-//                self?.totalLoaded += frineds.count
-                
-                DispatchQueue.main.async {
-                    self?.realmManager.save(data: Array(frineds!))
-                    self?.datalabel.text = string
-                    self?.tableView.reloadData()
-                }
-                
-                self?.isLoading = false
+                self?.realmManager.save(data: Array(frineds!))
             } catch {
                 print(error)
             }
         }.resume()
-        
     }
     
 }
@@ -89,22 +101,14 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSource?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        let friend = dataSource[indexPath.row]
-        cell?.textLabel?.text = friend.firstName + " " + friend.lastName
+        let friend = dataSource?[indexPath.row]
+        cell?.textLabel?.text = friend?.firstName ?? "" + " " + friend!.lastName
         return cell ?? UITableViewCell()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        print("End Dragging")
-//        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height) && !isLoading && totalLoaded != totalCount {
-//            print("Start")
-//            makeFriendsRequest(isInitial: false, from: totalLoaded, count: 20)
-//        }
     }
     
     

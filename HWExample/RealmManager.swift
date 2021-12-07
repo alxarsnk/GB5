@@ -10,11 +10,11 @@ import RealmSwift
 
 class RealmManager {
     
-    func save(data: [Friend]) {
+    func save<T: Object>(data: [T]) {
         do {
             let realm = try Realm()
             realm.beginWrite()
-            realm.add(data)
+            realm.add(data, update: .all)
             try realm.commitWrite()
             print("Save successful")
         } catch {
@@ -22,9 +22,9 @@ class RealmManager {
         }
     }
     
-    func getFrineds() -> [Friend] {
+    func getFrineds<T: Object>() -> [T] {
         let realm = try! Realm()
-        let listFirneds = realm.objects(Friend.self)
+        let listFirneds = realm.objects(T.self)
         return Array(listFirneds)
     }
     
